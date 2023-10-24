@@ -4,11 +4,10 @@ from .models import Estate, Category
 
 @admin.register(Estate)
 class EstateAdmin(admin.ModelAdmin):
-    list_display = ['rooms', 'area', 'available']
-    list_display_links = None
-    list_filter = ['rooms', 'area', 'material', 'available']
-    list_editable = ['rooms', 'available']
-    # prepopulated_fields = {'slug': ('name',)}
+    list_display = ['name', 'rooms', 'area', 'available', 'best_offer']
+    list_filter = ['name', 'rooms', 'area', 'material', 'available', 'best_offer']
+    list_editable = ['rooms', 'area', 'available', 'best_offer']
+    prepopulated_fields = {'slug': ('name',)}
 
 
 @admin.register(Category)
