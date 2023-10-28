@@ -8,10 +8,10 @@
     <meta name="keywords" content="ТОП ТРИ">
     <meta name="description" content="">
     <title>Гранд Грязи</title>
-    <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'css/catalog.css' %}" media="screen">
     <script class="u-script" type="text/javascript" src="{% static 'js/jquery.js' %}" defer=""></script>
-    <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'js/main.js' %}" defer=""></script>
     <link id="u-theme-google-font" rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
 
@@ -85,8 +85,6 @@
                         class="u-file-icon u-icon u-icon-5"><img src="{% static 'img/phone.png' %}" alt=""></span>&nbsp;8-900-594-11-80
                 </a>
             </div>
-
-
         </div>
         <div class="u-custom-color-6 u-section-row u-sticky u-sticky-e5e9 u-section-row-3" id="sec-2695">
             <div class="u-clearfix u-sheet u-valign-middle-md u-sheet-3">
@@ -157,103 +155,400 @@
     </div>
 </header>
 {% block content %}
-    <section class="u-align-center u-clearfix u-section-1" id="sec-1652">
-        <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-            <h2 class="u-align-left u-custom-font u-text u-text-default u-text-font u-text-1">Дома</h2>
-            <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
-                <div class="u-repeater u-repeater-1">
-                    {% for house in houses %}
+{% if houses %}
+<section class="u-align-center u-clearfix u-section-1" id="sec-5842">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-left u-text u-text-default u-text-1">Дома</h2>
+        <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
+            <div class="u-repeater u-repeater-1">
+                {% for house in houses %}
                     <div class="u-align-left u-container-style u-list-item u-repeater-item">
                         <div class="u-container-layout u-similar-container u-container-layout-1">
-                            <img class="u-expanded-width u-image u-image-default u-image-1" alt=""
-                                 data-image-width="2836" data-image-height="1875" src="{% if house.image %}{{ house.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-                            <h4 class="u-text u-text-2">{{ house.name }}</h4>
-                            <p class="u-text u-text-3">Площадь: {{ house.area }} м2</p>
-                            <p class="u-text u-text-3">Количество комнат: {{ house.rooms }}</p>
-                            <p class="u-text u-text-3">Описание: {{ house.description|truncatechars:50 }}</p>
+                        <a href="{% url 'agency:estate_detail_url' house.pk %}">
+                            <img class="u-expanded-width u-image u-image-default u-image-1" alt="" data-image-width="2836"
+                                 data-image-height="1875" src="{% if house.image %}{{ house.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
+                            <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' house.pk %}">{{ house.name }}</a></h4>
+                            <p class="u-text u-text-3"><strong>Количество комнат: </strong>{{ house.rooms }}</p>
+                            <p class="u-text u-text-3"><strong>Площадь: </strong>{{ house.area }} м²</p>
+                            <p class="u-text u-text-3"><strong>Материал стен: </strong>{{ house.material }}</p>
                         </div>
                     </div>
-                    {% endfor %}
-                </div>
-                <a class="u-absolute-vcenter u-gallery-nav u-gallery-nav-prev u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-gallery-nav-1"
-                   href="#" role="button">
-            <span aria-hidden="true">
-              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
-            </span>
-                    <span class="sr-only">
-              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
-            </span>
-                </a>
-                <a class="u-absolute-vcenter u-gallery-nav u-gallery-nav-next u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-gallery-nav-2"
-                   href="#" role="button">
-            <span aria-hidden="true">
-              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
-L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
-c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
-            </span>
-                    <span class="sr-only">
-              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
-L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
-c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
-            </span>
-                </a>
+                {% endfor %}
             </div>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-prev u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-1"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+            </a>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-next u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-2"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+            </a>
         </div>
-    </section>
-    <section class="u-align-center u-clearfix u-section-2" id="sec-3466">
-        <div class="u-clearfix u-sheet u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-            <h2 class="u-align-left u-custom-font u-text u-text-default u-text-font u-text-1">Квартиры</h2>
-            <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
-                <div class="u-repeater u-repeater-1">
-                    {% for flate in flates %}
+    </div>
+</section>
+{% endif %}
+{% if flates %}
+<section class="u-align-center u-clearfix u-section-2" id="sec-1ded">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-left u-text u-text-default u-text-1">Квартиры</h2>
+        <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
+            <div class="u-repeater u-repeater-1">
+                {% for flate in flates %}
                     <div class="u-align-left u-container-style u-list-item u-repeater-item">
                         <div class="u-container-layout u-similar-container u-container-layout-1">
-                            <img class="u-expanded-width u-image u-image-default u-image-1" alt=""
-                                 data-image-width="2836" data-image-height="1875" src="{% if flate.image %}{{ flate.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-                            <h4 class="u-custom-font u-text u-text-font u-text-2">{{ flate.name }}</h4>
-                            <p class="u-text u-text-3">Площадь: {{ flate.area }} м2</p>
-                            <p class="u-text u-text-3">Количество комнат: {{ flate.rooms }}</p>
-                            <p class="u-text u-text-3">Описание: {{ flate.description|truncatechars:50 }}</p>
+                        <a href="{% url 'agency:estate_detail_url' flate.pk %}">
+                            <img class="u-expanded-width u-image u-image-default u-image-1" alt="" data-image-width="2836"
+                                 data-image-height="1875" src="{% if flate.image %}{{ flate.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
+                            <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' flate.pk %}">{{ flate.name }}</a></h4>
+                            <p class="u-text u-text-3"><strong>Количество комнат: </strong>{{ flate.rooms }}</p>
+                            <p class="u-text u-text-3"><strong>Площадь: </strong>{{ flate.area }} м²</p>
+                            <p class="u-text u-text-3"><strong>Материал стен: </strong>{{ flate.material }}</p>
                         </div>
                     </div>
-                    {% endfor %}
-                </div>
-                <a class="u-absolute-vcenter u-gallery-nav u-gallery-nav-prev u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-gallery-nav-1"
-                   href="#" role="button">
-            <span aria-hidden="true">
-              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
-            </span>
-                    <span class="sr-only">
-              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
-            </span>
-                </a>
-                <a class="u-absolute-vcenter u-gallery-nav u-gallery-nav-next u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-gallery-nav-2"
-                   href="#" role="button">
-            <span aria-hidden="true">
-              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
-L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
-c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
-            </span>
-                    <span class="sr-only">
-              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
-L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
-c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
-            </span>
-                </a>
+                {% endfor %}
             </div>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-prev u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-1"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+            </a>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-next u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-2"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+            </a>
         </div>
-    </section>
+    </div>
+</section>
+{% endif %}
+{% if rooms %}
+<section class="u-align-center u-clearfix u-section-3" id="sec-0e10">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-left u-text u-text-default u-text-1">Комнаты</h2>
+        <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
+            <div class="u-repeater u-repeater-1">
+                {% for room in rooms %}
+                    <div class="u-align-left u-container-style u-list-item u-repeater-item">
+                        <div class="u-container-layout u-similar-container u-container-layout-1">
+                        <a href="{% url 'agency:estate_detail_url' room.pk %}">
+                            <img class="u-expanded-width u-image u-image-default u-image-1" alt="" data-image-width="2836"
+                                 data-image-height="1875" src="{% if room.image %}{{ room.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
+                            <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' room.pk %}">{{ room.name }}</a></h4>
+                            <p class="u-text u-text-3"><strong>Площадь: </strong>{{ room.area }} м²</p>
+                            <p class="u-text u-text-3"><strong>Материал стен: </strong>{{ room.material }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-prev u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-1"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+            </a>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-next u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-2"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% if sectors %}
+<section class="u-align-center u-clearfix u-section-4" id="sec-ab73">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-left u-text u-text-default u-text-1">Участки</h2>
+        <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
+            <div class="u-repeater u-repeater-1">
+                {% for sector in sectors %}
+                    <div class="u-align-left u-container-style u-list-item u-repeater-item">
+                        <div class="u-container-layout u-similar-container u-container-layout-1">
+                        <a href="{% url 'agency:estate_detail_url' sector.pk %}">
+                            <img class="u-expanded-width u-image u-image-default u-image-1" alt="" data-image-width="2836"
+                                 data-image-height="1875" src="{% if sector.image %}{{ sector.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
+                            <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' sector.pk %}">{{ sector.name }}</a></h4>
+                            <p class="u-text u-text-3"><strong>Площадь: </strong>{{ sector.area }} м²</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-prev u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-1"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+            </a>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-next u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-2"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% if commercial %}
+<section class="u-align-center u-clearfix u-section-5" id="sec-17c6">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-left u-text u-text-default u-text-1">Коммерческие</h2>
+        <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
+            <div class="u-repeater u-repeater-1">
+                {% for comm in commercial %}
+                    <div class="u-align-left u-container-style u-list-item u-repeater-item">
+                        <div class="u-container-layout u-similar-container u-container-layout-1">
+                        <a href="{% url 'agency:estate_detail_url' comm.pk %}">
+                            <img class="u-expanded-width u-image u-image-default u-image-1" alt="" data-image-width="2836"
+                                 data-image-height="1875" src="{% if comm.image %}{{ comm.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
+                            <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' comm.pk %}">{{ comm.name }}</a></h4>
+                            <p class="u-text u-text-3"><strong>Площадь: </strong>{{ comm.area }} м²</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-prev u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-1"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+            </a>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-next u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-2"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% if garages %}
+<section class="u-align-center u-clearfix u-section-6" id="sec-ee2e">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-left u-text u-text-default u-text-1">Гаражи</h2>
+        <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
+            <div class="u-repeater u-repeater-1">
+                {% for garage in garages %}
+                    <div class="u-align-left u-container-style u-list-item u-repeater-item">
+                        <div class="u-container-layout u-similar-container u-container-layout-1">
+                        <a href="{% url 'agency:estate_detail_url' garage.pk %}">
+                            <img class="u-expanded-width u-image u-image-default u-image-1" alt="" data-image-width="2836"
+                                 data-image-height="1875" src="{% if garage.image %}{{ garage.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
+                            <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' garage.pk %}">{{ garage.name }}</a></h4>
+                            <p class="u-text u-text-3"><strong>Площадь: </strong>{{ garage.area }} м²</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-prev u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-1"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+            </a>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-next u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-2"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% if rent %}
+<section class="u-align-center u-clearfix u-section-7" id="sec-d0ef">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-left u-text u-text-default u-text-1">Аренда</h2>
+        <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
+            <div class="u-repeater u-repeater-1">
+                {% for r in rent %}
+                    <div class="u-align-left u-container-style u-list-item u-repeater-item">
+                        <div class="u-container-layout u-similar-container u-container-layout-1">
+                        <a href="{% url 'agency:estate_detail_url' r.pk %}">
+                            <img class="u-expanded-width u-image u-image-default u-image-1" alt="" data-image-width="2836"
+                                 data-image-height="1875" src="{% if r.image %}{{ r.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
+                            <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' r.pk %}">{{ r.name }}</a></h4>
+                            <p class="u-text u-text-3"><strong>Количество комнат: </strong>{{ r.rooms }}</p>
+                            <p class="u-text u-text-3"><strong>Площадь: </strong>{{ r.area }} м²</p>
+                            <p class="u-text u-text-3"><strong>Материал стен: </strong>{{ r.material }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-prev u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-1"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+            </a>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-next u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-2"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% if others %}
+<section class="u-align-center u-clearfix u-section-8" id="sec-370d">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-left u-text u-text-default u-text-1">Прочие</h2>
+        <div class="u-expanded-width u-layout-horizontal u-list u-list-1">
+            <div class="u-repeater u-repeater-1">
+                {% for other in others %}
+                    <div class="u-align-left u-container-style u-list-item u-repeater-item">
+                        <div class="u-container-layout u-similar-container u-container-layout-1">
+                        <a href="{% url 'agency:estate_detail_url' other.pk %}">
+                            <img class="u-expanded-width u-image u-image-default u-image-1" alt="" data-image-width="2836"
+                                 data-image-height="1875" src="{% if other.image %}{{ other.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
+                            <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' other.pk %}">{{ other.name }}</a></h4>
+                            <p class="u-text u-text-3"><strong>Количество комнат: </strong>{{ other.rooms }}</p>
+                            <p class="u-text u-text-3"><strong>Площадь: </strong>{{ other.area }} м²</p>
+                            <p class="u-text u-text-3"><strong>Материал стен: </strong>{{ other.material }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-prev u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-1"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+            </a>
+            <a class="u-absolute-vcenter u-border-2 u-border-hover-grey-50 u-border-white u-gallery-nav u-gallery-nav-next u-grey-70 u-hover-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-hover-grey-50 u-text-white u-gallery-nav-2"
+               href="#" role="button">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+                <span class="sr-only">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
 {% endblock %}
-
-
 <footer class="u-align-center u-clearfix u-footer u-gradient u-footer" id="sec-2cbf">
     <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-align-center u-small-text u-text u-text-body-alt-color u-text-variant u-text-1">Сотрудничаем с
@@ -267,6 +562,9 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             2023</p>
     </div>
 </footer>
-
+    <span style="height: 64px; width: 64px; margin-left: 0px; margin-right: auto; margin-top: 0px; right: 20px; bottom: 20px; padding: 8px; background-image: none;" class="u-back-to-top u-border-4 u-border-white u-grey-50 u-icon u-icon-circle u-opacity u-opacity-25 u-radius-50" data-href="#">
+        <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
+        <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
+    </span>
 </body>
 </html>
