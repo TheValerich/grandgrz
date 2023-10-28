@@ -34,8 +34,11 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse(
-            'agency:catalog_by_category_url',
-            args=[self.slug]
-        )
+
+class EstateImage(models.Model):
+    estate = models.ForeignKey('Estate', on_delete=models.CASCADE, related_name='images', verbose_name='Объект')
+    image = models.ImageField(upload_to='estates/%Y/%m/%d', verbose_name='Изображение')
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'
