@@ -274,9 +274,10 @@
                 {% for offer in best_offer %}
                 <div class="u-align-left u-container-style u-list-item u-repeater-item">
                     <div class="u-container-layout u-similar-container u-container-layout-1">
+                    <a href="{% url 'agency:estate_detail_url' offer.pk %}">
                         <img class="u-expanded-width u-image u-image-default u-image-1" alt="image" data-image-width="512"
-                             data-image-height="512" src="{% if offer.image %}{{ offer.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-                        <h4 class="u-text u-text-2">{{ offer.name }}</h4>
+                             data-image-height="512" src="{% if offer.image %}{{ offer.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
+                        <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' offer.pk %}">{{ offer.name }}</a></h4>
                         <p class="u-text u-text-3"><strong>Площадь:</strong> {{ offer.area }}</p>
                         <p class="u-text u-text-3"><strong>Количество комнат:</strong> {{ offer.rooms }}</p>
                     </div>
@@ -310,10 +311,13 @@
         <h5 class="u-align-center u-custom-font u-text u-text-default u-text-font u-text-grey-40 u-text-2">ГРАНД
             ГРЯЗИ<br>
         </h5>
-        <p class="u-align-right u-small-text u-text u-text-body-alt-color u-text-variant u-text-3">All Rights Reserved
-            2023</p>
+        <p class="u-align-right u-small-text u-text u-text-body-alt-color u-text-variant u-text-3">ALL RIGHTS RESERVED 2023</p>
+        <p class="u-align-right u-small-text u-text u-text-body-alt-color u-text-variant u-text-3">GRAND-GRYZI@MAIL.RU</p>
     </div>
 </footer>
-
+    <span style="height: 64px; width: 64px; margin-left: 0px; margin-right: auto; margin-top: 0px; right: 20px; bottom: 20px; padding: 8px; background-image: none;" class="u-back-to-top u-border-4 u-border-white u-grey-50 u-icon u-icon-circle u-opacity u-opacity-25 u-radius-50" data-href="#">
+        <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
+        <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
+    </span>
 </body>
 </html>
