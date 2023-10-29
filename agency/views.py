@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Estate, Workers
+from .models import Estate, Workers, Requisites
 
 
 def main_page_view(request):
@@ -13,7 +13,8 @@ def workers_view(request):
 
 
 def requisites_view(request):
-    return render(request, 'requisites.html')
+    requisites = Requisites.objects.all().order_by('id')
+    return render(request, 'requisites.html', {'requisites': requisites})
 
 
 def estate_list_by_category_view(request):
