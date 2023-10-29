@@ -52,12 +52,42 @@ def estate_list_by_category_view(request):
     )
 
 
-class EstateDetailView(DetailView):
-    model = Estate
-    template_name = 'estate_detail.html'
-    context_object_name = 'estate'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['images'] = Estate.objects.get(id=self.object.pk).images.all()
-        return context
+def estate_detail_view(request, pk):
+    estate = Estate.objects.get(pk=pk)
+    images = estate.images.all()
+    estates = Estate.objects.filter(available=True).select_related('category')
+    context = {
+        'houses': [],
+        'flates': [],
+        'sectors': [],
+        'garages': [],
+        'commercial': [],
+        'rent': [],
+        'rooms': [],
+        'others': [],
+        'estate': estate,
+        'images': images
+    }
+    for estate in estates:
+        category_name = estate.category.name
+        if category_name == 'Дома':
+            context['houses'].append(estate)
+        elif category_name == 'Квартиры':
+            context['flates'].append(estate)
+        elif category_name == 'Участки':
+            context['sectors'].append(estate)
+        elif category_name == 'Гаражи':
+            context['garages'].append(estate)
+        elif category_name == 'Коммерческие':
+            context['commercial'].append(estate)
+        elif category_name == 'Аренда':
+            context['rent'].append(estate)
+        elif category_name == 'Комнаты':
+            context['rooms'].append(estate)
+        elif category_name == 'Прочие':
+            context['others'].append(estate)
+    return render(
+        request,
+        'estate_detail.html',
+        context
+    )
