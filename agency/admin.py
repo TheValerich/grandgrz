@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Estate, Category, EstateImage, Workers
+from .models import Estate, Category, EstateImage, Workers, Requisites
 
 
 @admin.register(Category)
@@ -29,6 +29,11 @@ class EstateAdmin(admin.ModelAdmin):
 @admin.register(Workers)
 class WorkersAdmin(admin.ModelAdmin):
     list_display = ['name']
+
+
+@admin.register(Requisites)
+class RequisitesAdmin(admin.ModelAdmin):
+    list_display = ['bank']
 
 
 admin.site.register(EstateImage, EstateImageAdmin)
