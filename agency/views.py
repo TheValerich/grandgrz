@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import DetailView
-from .models import Estate, Category
+from .models import Estate, Workers
 
 
 def main_page_view(request):
@@ -9,7 +8,8 @@ def main_page_view(request):
 
 
 def workers_view(request):
-    return render(request, 'workers.html')
+    workers = Workers.objects.all().order_by('id')
+    return render(request, 'workers.html', {'workers': workers})
 
 
 def requisites_view(request):
@@ -37,7 +37,7 @@ def estate_list_by_category_view(request):
             context['sectors'].append(estate)
         elif estate.category.name == 'Гаражи':
             context['garages'].append(estate)
-        elif estate.category.name == 'Коммерческие':
+        elif estate.category.name == 'Коммерческая недвижимость':
             context['commercial'].append(estate)
         elif estate.category.name == 'Аренда':
             context['rent'].append(estate)
