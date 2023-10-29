@@ -54,3 +54,17 @@ class Workers(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Requisites(models.Model):
+    bank = models.CharField(max_length=256, verbose_name='Банк получателя')
+    bick = models.CharField(max_length=128, verbose_name='БИК')
+    account = models.CharField(max_length=128, verbose_name='Р/счёт')
+    corr_account = models.CharField(max_length=128, verbose_name='Корр. счет')
+
+    class Meta:
+        verbose_name = 'Реквизиты'
+        verbose_name_plural = 'Реквизиты'
+
+    def __str__(self):
+        return self.bank
