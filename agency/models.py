@@ -5,10 +5,10 @@ from django.urls import reverse
 class Estate(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='estates', verbose_name='Категория')
     name = models.CharField(max_length=64, verbose_name='Название', default='')
-    area = models.FloatField(verbose_name='Общая площадь')
-    rooms = models.IntegerField(verbose_name='Количество комнат', default=1)
+    area = models.FloatField(verbose_name='Общая площадь', blank=True)
+    rooms = models.IntegerField(verbose_name='Количество комнат', default=1, blank=True)
     material = models.CharField(max_length=128, verbose_name='Материал стен', blank=True)
-    description = models.TextField(verbose_name='Описание')
+    description = models.TextField(verbose_name='Описание', blank=True)
     slug = models.SlugField(max_length=200, verbose_name='Слаг')
     image = models.ImageField(upload_to='agency/%Y/%m/%d', blank=True, verbose_name='Изображение')
     available = models.BooleanField(default=True, verbose_name='Доступен к продаже?')
