@@ -153,183 +153,44 @@
                 </nav>
             </div>
         </div>
-
-
     </div>
 </header>
-<section class="u-clearfix u-section-1" id="sec-ac03">
-    <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
-        <div class="data-layout-selected u-clearfix u-expanded-width-sm u-expanded-width-xs u-gutter-0 u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-21 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                            <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-1"
-                                 src="{% static 'img/workers/worker1.png' %}" alt="" data-image-width="512"
-                                 data-image-height="512">
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-39 u-layout-cell-2">
-                        <div class="u-container-layout u-container-layout-2">
-                            <div class="fr-view u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xl u-clearfix u-rich-text u-text u-text-1">
-                                <p id="isPasted">
-                                    <span style="font-weight: 700;">Перепелкин Евгений Юрьевич</span>
-                                </p>
-                                <p>Директор и основатель компании</p>
-                                <p>Работает с 2014 года</p>
+{% block content %}
+    {% for worker in workers %}
+        <section class="u-clearfix u-section-1" id="sec-f331">
+            <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+                <div class="custom-expanded data-layout-selected u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1">
+                    <div class="u-layout">
+                        <div class="u-layout-row">
+                            <div class="u-container-style u-layout-cell u-size-21 u-layout-cell-1">
+                                <div class="u-container-layout u-valign-top u-container-layout-1">
+                                    <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-1"
+                                         src="{% if worker.photo %}{{ worker.photo.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+                                         alt="" data-image-width="512" data-image-height="512">
+                                </div>
                             </div>
-                            <a href="tel:89046884011"
-                               class="u-btn u-button-style u-none u-text-body-color u-btn-1"><span
-                                    class="u-file-icon u-icon u-icon-1"><img src="{% static 'img/phone.png' %}" alt=""></span>&nbsp;​89046884011
-                            </a>
+                            <div class="u-container-style u-layout-cell u-size-39 u-layout-cell-2">
+                                <div class="u-container-layout u-container-layout-2">
+                                    <div class="fr-view u-align-left u-clearfix u-rich-text u-text u-text-1">
+                                        <p id="isPasted">
+                                            <span style="font-weight: 700;">{{ worker.name }}</span>
+                                        </p>
+                                        <p>{{ worker.description }}</p>
+                                    </div>
+                                    <a href="tel:{{ worker.phone }}"
+                                       class="u-btn u-button-style u-none u-text-body-color u-btn-1"><span
+                                            class="u-file-icon u-icon u-icon-1"><img src="{% if worker.phone %}{% static 'img/phone.png' %}{% endif %}"
+                                                                                     alt=""></span>&nbsp;​{{ worker.phone }}
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="data-layout-selected u-clearfix u-expanded-width-sm u-expanded-width-xs u-gutter-0 u-layout-wrap u-layout-wrap-2">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-21 u-layout-cell-3">
-                        <div class="u-container-layout u-valign-top u-container-layout-3">
-                            <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-2"
-                                 src="{% static 'img/workers/worker2.png' %}" alt="" data-image-width="512"
-                                 data-image-height="512">
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-39 u-layout-cell-4">
-                        <div class="u-container-layout u-container-layout-4">
-                            <div class="fr-view u-align-left-lg u-align-left-md u-align-left-xl u-clearfix u-rich-text u-text u-text-2">
-                                <p id="isPasted">
-                                    <span style="font-weight: 700;">Мещеряков Иван Евгеньевич</span>&nbsp;
-                                </p>
-                                <p>Руководитель отдела продаж</p>
-                                <p>Работает с 2016 года</p>
-                            </div>
-                            <a href="tel:89005941190"
-                               class="u-btn u-button-style u-none u-text-body-color u-btn-2"><span
-                                    class="u-file-icon u-icon u-icon-2"><img src="{% static 'img/phone.png' %}" alt=""></span>&nbsp;​​89005941190
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="data-layout-selected u-clearfix u-expanded-width-sm u-expanded-width-xs u-gutter-0 u-layout-wrap u-layout-wrap-3">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-21 u-layout-cell-5">
-                        <div class="u-container-layout u-valign-top u-container-layout-5">
-                            <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-3"
-                                 src="{% static 'img/workers/worker3.jpg' %}" alt="" data-image-width="512"
-                                 data-image-height="512">
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-39 u-layout-cell-6">
-                        <div class="u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-6">
-                            <div class="fr-view u-align-left-lg u-align-left-md u-align-left-xl u-clearfix u-rich-text u-text u-text-3">
-                                <p id="isPasted">
-                                    <span style="font-weight: 700;">Папин Вадим</span> &nbsp;
-                                </p>
-                                <p>Специалист по недвижимости</p>
-                                <p>Работает с 2021 года</p>
-                            </div>
-                            <a href="tel:89042892030"
-                               class="u-btn u-button-style u-none u-text-body-color u-btn-3"><span
-                                    class="u-file-icon u-icon u-icon-3"><img src="{% static 'img/phone.png' %}" alt=""></span>&nbsp;​89042892030
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="data-layout-selected u-clearfix u-expanded-width-sm u-expanded-width-xs u-gutter-0 u-layout-wrap u-layout-wrap-4">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-21 u-layout-cell-7">
-                        <div class="u-container-layout u-valign-top u-container-layout-7">
-                            <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-4"
-                                 src="{% static 'img/workers/worker4.png' %}" alt="" data-image-width="512"
-                                 data-image-height="512">
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-39 u-layout-cell-8">
-                        <div class="u-container-layout u-container-layout-8">
-                            <div class="fr-view u-align-left-lg u-align-left-md u-align-left-xl u-clearfix u-rich-text u-text u-text-4">
-                                <p id="isPasted">
-                                    <span style="font-weight: 700;">Фролов Никита</span>
-                                </p>
-                                <p>Специалист по недвижимости&nbsp;</p>
-                                <p>Работает с 2021 года</p>
-                            </div>
-                            <a href="tel:89202481400"
-                               class="u-btn u-button-style u-none u-text-body-color u-btn-4"><span
-                                    class="u-file-icon u-icon u-icon-4"><img src="{% static 'img/phone.png' %}" alt=""></span>&nbsp;​​89202481400
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="data-layout-selected u-clearfix u-expanded-width-sm u-expanded-width-xs u-gutter-0 u-layout-wrap u-layout-wrap-5">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-21 u-layout-cell-9">
-                        <div class="u-container-layout u-valign-top u-container-layout-9">
-                            <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-5"
-                                 src="{% static 'img/workers/worker2.png' %}" alt="" data-image-width="512"
-                                 data-image-height="512">
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-39 u-layout-cell-10">
-                        <div class="u-container-layout u-container-layout-10">
-                            <div class="fr-view u-align-left-lg u-align-left-md u-align-left-xl u-clearfix u-rich-text u-text u-text-5">
-                                <p id="isPasted">
-                                    <span style="font-weight: 700;">Носов Артем</span>
-                                </p>
-                                <p>Специалист по недвижимости</p>
-                                <p>Работает с 2023 года</p>
-                            </div>
-                            <a href="tel:89933506335"
-                               class="u-btn u-button-style u-none u-text-body-color u-btn-5"><span
-                                    class="u-file-icon u-icon u-icon-5"><img src="{% static 'img/phone.png' %}" alt=""></span>89933506335
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="data-layout-selected u-clearfix u-expanded-width-sm u-expanded-width-xs u-gutter-0 u-layout-wrap u-layout-wrap-6">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-container-style u-layout-cell u-size-21 u-layout-cell-11">
-                        <div class="u-container-layout u-valign-top u-container-layout-11">
-                            <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-6"
-                                 src="{% static 'img/workers/worker5.png' %}" alt="" data-image-width="512"
-                                 data-image-height="512">
-                        </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-39 u-layout-cell-12">
-                        <div class="u-container-layout u-container-layout-12">
-                            <div class="fr-view u-align-left-lg u-align-left-md u-align-left-xl u-clearfix u-rich-text u-text u-text-6">
-                                <p id="isPasted">
-                                    <span style="font-weight: 700;">Субботина Анна</span>
-                                </p>
-                                <p>Секретарь&nbsp;</p>
-                                <p>Работает с 2022 года</p>
-                            </div>
-                            <a href="tel:89005941180"
-                               class="u-btn u-button-style u-none u-text-body-color u-btn-6"><span
-                                    class="u-file-icon u-icon u-icon-6"><img src="{% static 'img/phone.png' %}" alt=""></span>&nbsp;​​89005941180
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
+        </section>
+    {% endfor %}
+{% endblock %}
 <footer class="u-align-center u-clearfix u-footer u-gradient u-footer" id="sec-2cbf">
     <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-align-center u-small-text u-text u-text-body-alt-color u-text-variant u-text-1">Сотрудничаем с
