@@ -1,11 +1,10 @@
 from django.contrib import admin
-from .models import Estate, Category, EstateImage
+from .models import Estate, Category, EstateImage, Workers
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug']
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ['name']
 
 
 class EstateImageAdmin(admin.ModelAdmin):
@@ -24,8 +23,12 @@ class EstateAdmin(admin.ModelAdmin):
     list_display = ['name', 'rooms', 'area', 'available', 'best_offer']
     list_filter = ['category', 'name', 'rooms', 'area', 'material', 'available', 'best_offer']
     list_editable = ['rooms', 'area', 'available', 'best_offer']
-    prepopulated_fields = {'slug': ('name',)}
     inlines = [EstateImageInline, ]
+
+
+@admin.register(Workers)
+class WorkersAdmin(admin.ModelAdmin):
+    list_display = ['name']
 
 
 admin.site.register(EstateImage, EstateImageAdmin)
