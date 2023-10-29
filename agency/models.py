@@ -9,7 +9,6 @@ class Estate(models.Model):
     rooms = models.IntegerField(verbose_name='Количество комнат', default=1, blank=True)
     material = models.CharField(max_length=128, verbose_name='Материал стен', blank=True)
     description = models.TextField(verbose_name='Описание', blank=True)
-    slug = models.SlugField(max_length=200, verbose_name='Слаг')
     image = models.ImageField(upload_to='agency/%Y/%m/%d', blank=True, verbose_name='Изображение')
     available = models.BooleanField(default=True, verbose_name='Доступен к продаже?')
     best_offer = models.BooleanField(default=False, verbose_name='Лучшее предложение')
@@ -25,7 +24,6 @@ class Estate(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=64, verbose_name='Наименование')
-    slug = models.SlugField(max_length=64, unique=True, verbose_name='Слаг')
 
     class Meta:
         verbose_name = 'Категория'
@@ -42,3 +40,17 @@ class EstateImage(models.Model):
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
+
+
+class Workers(models.Model):
+    name = models.CharField(max_length=128, verbose_name='ФИО')
+    description = models.TextField(verbose_name='О себе', blank=True)
+    phone = models.CharField(max_length=128, verbose_name='Телефон', blank=True)
+    photo = models.ImageField(upload_to='workers/%Y/%m/%d', verbose_name='Фото', blank=True)
+
+    class Meta:
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'
+
+    def __str__(self):
+        return self.name
