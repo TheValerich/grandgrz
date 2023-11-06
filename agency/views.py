@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Estate, Workers, Requisites
+from django.views.decorators.cache import cache_page
 
 
 def main_page_view(request):
@@ -17,6 +18,7 @@ def requisites_view(request):
     return render(request, 'requisites.html', {'requisites': requisites})
 
 
+@cache_page(600)
 def estate_list_by_category_view(request):
     estates = Estate.objects.filter(available=True).select_related('category')
     context = {
