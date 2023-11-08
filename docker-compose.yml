@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  grandgrz_database:
+    image: postgres:14
+    container_name: grandgrz_postgres
+    volumes:
+      - ~/.pg/pg_data/data:/var/lib/postgresql/data
+    env_file:
+      - .env
+  grandgrz_project:
+    image: grandgrz:latest
+    container_name: grandgrz
+    depends_on:
+      - grandgrz_database
+    volumes:
+      - static_volume:/grandgrz/static
+      - media_volume:/grandgrz/media
+    env_file:
+      - .env
+    command: >
+      bash -c "./manage.py collectstatic --noinput && ./manage.py migrate  && gunicorn -b 0.0.0.0:8000 grandgrz.wsgi:application"
+  nginx:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./docker/nginx/
+    container_name: grandgrz_nginx
+    image: grandgrz_nginx
+    volumes:
+      - static_volume:/grandgrz/static
+      - media_volume:/grandgrz/media
+    depends_on:
+      - grandgrz_project
+    ports:
+      - "${NGINX_EXTERNAL_PORT}:8080"
+
+volumes:
+  static_volume:
+  media_volume:
