@@ -1,4 +1,4 @@
-version: "3.9"
+version: "2"
 
 services:
   grandgrz_database:
@@ -18,8 +18,11 @@ services:
       - media_volume:/grandgrz/media
     env_file:
       - .env
+    environment:
+      - VIRTUAL_HOST=${ALLOWED_HOST}
+      - LETSENCRYPT_HOST=${ALLOWED_HOST}
     command: >
-      bash -c "./manage.py collectstatic --noinput && ./manage.py migrate  && gunicorn -b 0.0.0.0:8000 grandgrz.wsgi:application"
+      bash -c "./manage.py collectstatic --noinput && ./manage.py migrate  && gunicorn -b 0.0.0.0:8001 grandgrz.wsgi:application"
   nginx:
     build:
       dockerfile: ./Dockerfile
@@ -29,11 +32,28 @@ services:
     volumes:
       - static_volume:/grandgrz/static
       - media_volume:/grandgrz/media
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ru
     depends_on:
       - grandgrz_project
     ports:
       - "${NGINX_EXTERNAL_PORT}:8080"
+      - "${NGINX_EXTERNAL_SSL_PORT}:443"
+  acme_companion:
+    image: nginxproxy/acme-companion:2.2
+    container_name: grandgrz_acme_companion
+    volumes_from:
+      - nginx
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
 
 volumes:
   static_volume:
   media_volume:
+  certs:
+  vhost:
+  html:
+  acme:
