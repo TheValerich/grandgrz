@@ -1,0 +1,7 @@
+location /static/ {
+    alias /grandgrz/static/;
+}
+
+location /media/ {
+    alias /grandgrz/media/;
+}
