@@ -8,9 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = False
+DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS'),]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -149,5 +149,10 @@ LOGGING = {
     }
 }
 CSRF_TRUSTED_ORIGINS = []
-if scrf_subdomain := os.getenv('SCRF_SUBDOMAIN'):
-    CSRF_TRUSTED_ORIGINS += [f'http://{scrf_subdomain}', f'https://{scrf_subdomain}']
+if csrf_subdomain := os.getenv('CSRF_SUBDOMAIN'):
+    CSRF_TRUSTED_ORIGINS += [
+        f'https://{csrf_subdomain}.grandgrz48.ru',
+        f'https://{csrf_subdomain}',
+        f'http://{csrf_subdomain}.grandgrz48.ru',
+        f'http://{csrf_subdomain}',
+    ]
