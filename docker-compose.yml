@@ -19,8 +19,8 @@ services:
     env_file:
       - .env
     environment:
-      - VIRTUAL_HOST=${ALLOWED_HOST}
-      - LETSENCRYPT_HOST=${ALLOWED_HOST}
+      - VIRTUAL_HOST=${ALLOWED_HOSTS}
+      - LETSENCRYPT_HOST=${ALLOWED_HOSTS}
     command: >
       bash -c "./manage.py collectstatic --noinput && ./manage.py migrate  && gunicorn -b 0.0.0.0:8001 grandgrz.wsgi:application"
   nginx:
