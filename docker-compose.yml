@@ -1,58 +1,58 @@
 version: "2"
 
 services:
-  grandgrz_database:
+  grandgrz_db_ssl:
     image: postgres:14
-    container_name: grandgrz_postgres
+    container_name: grandgrz_db_ssl
     volumes:
       - ~/.pg/pg_data/data:/var/lib/postgresql/data
     env_file:
       - .env
-  grandgrz_project:
-    image: grandgrz:latest
-    container_name: grandgrz
+  grandgrz_project_ssl:
+    image: grandgrz_ssl:latest
+    container_name: grandgrz_ssl
     depends_on:
-      - grandgrz_database
+      - grandgrz_db_ssl
     volumes:
-      - static_volume:/grandgrz/static
-      - media_volume:/grandgrz/media
+      - static_volume_ssl:/grandgrz/static
+      - media_volume_ssl:/grandgrz/media
     env_file:
       - .env
     environment:
-      - VIRTUAL_HOST=${ALLOWED_HOSTS}
-      - LETSENCRYPT_HOST=${ALLOWED_HOSTS}
+      - VIRTUAL_HOST=${ALLOWED_HOST}
+      - LETSENCRYPT_HOST=${ALLOWED_HOST}
     command: >
-      bash -c "./manage.py collectstatic --noinput && ./manage.py migrate  && gunicorn -b 0.0.0.0:8001 grandgrz.wsgi:application"
-  nginx:
+      bash -c "./manage.py collectstatic --noinput && ./manage.py migrate  && gunicorn -b 0.0.0.0:8000 grandgrz.wsgi:application"
+  grandgrz_nginx_ssl:
     build:
       dockerfile: ./Dockerfile
       context: ./docker/nginx/
-    container_name: grandgrz_nginx
-    image: grandgrz_nginx
+    container_name: grandgrz_nginx_ssl
+    image: grandgrz_nginx_ssl
     volumes:
-      - static_volume:/grandgrz/static
-      - media_volume:/grandgrz/media
+      - static_volume_ssl:/grandgrz/static
+      - media_volume_ssl:/grandgrz/media
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ru
     depends_on:
-      - grandgrz_project
+      - grandgrz_project_ssl
     ports:
-      - "${NGINX_EXTERNAL_PORT}:8080"
+      - "${NGINX_EXTERNAL_PORT}:80"
       - "${NGINX_EXTERNAL_SSL_PORT}:443"
-  acme_companion:
+  acme_companion_ssl:
     image: nginxproxy/acme-companion:2.2
-    container_name: grandgrz_acme_companion
+    container_name: grandgrz_acme_ssl
     volumes_from:
-      - nginx
+      - grandgrz_nginx_ssl
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - acme:/etc/acme.sh
 
 volumes:
-  static_volume:
-  media_volume:
+  static_volume_ssl:
+  media_volume_ssl:
   certs:
   vhost:
   html:
