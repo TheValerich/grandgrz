@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 
 services:
   grandgrz_database:
@@ -32,7 +32,7 @@ services:
     depends_on:
       - grandgrz_project
     ports:
-      - "${NGINX_EXTERNAL_PORT}:8080"
+      - "${NGINX_EXTERNAL_PORT}:80"
 
 volumes:
   static_volume:
