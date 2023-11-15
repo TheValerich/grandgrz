@@ -2,7 +2,6 @@ FROM python:3.10.13
 
 SHELL ["/bin/bash", "-c"]
 
-# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
@@ -20,4 +19,4 @@ RUN pip install -r requirements.txt
 
 USER grandgrz
 
-CMD ["gunicorn", "-b", "0.0.0.0:8001", "grandgrz.wsgi:application"]
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "grandgrz.wsgi:application"]
