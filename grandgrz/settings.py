@@ -148,6 +148,6 @@ LOGGING = {
         }
     }
 }
-# CSRF_TRUSTED_ORIGINS = []
-# if csrf_subdomain := os.getenv('CSRF_SUBDOMAIN'):
-#     CSRF_TRUSTED_ORIGINS += [f'http://{csrf_subdomain}', f'https://{csrf_subdomain}']
+CSRF_TRUSTED_ORIGINS = []
+if csrf_subdomain := os.getenv('CSRF_SUBDOMAIN'):
+    CSRF_TRUSTED_ORIGINS += [f'http://{csrf_subdomain}', f'https://{csrf_subdomain}']

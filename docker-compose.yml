@@ -1,21 +1,21 @@
 version: "2"
 
 services:
-  grandgrz_db_ssl:
+  grandgrz_db:
     image: postgres:14
-    container_name: grandgrz_db_ssl
+    container_name: grandgrz_db
     volumes:
       - ~/.pg/pg_data/data:/var/lib/postgresql/data
     env_file:
       - .env
-  grandgrz_project_ssl:
-    image: grandgrz_ssl:latest
-    container_name: grandgrz_ssl
+  grandgrz_project:
+    image: grandgrz:latest
+    container_name: grandgrz
     depends_on:
-      - grandgrz_db_ssl
+      - grandgrz_db
     volumes:
-      - static_volume_ssl:/grandgrz/static
-      - media_volume_ssl:/grandgrz/media
+      - static_volume:/grandgrz/static
+      - media_volume:/grandgrz/media
     env_file:
       - .env
     environment:
@@ -23,36 +23,36 @@ services:
       - LETSENCRYPT_HOST=${ALLOWED_HOST}
     command: >
       bash -c "./manage.py collectstatic --noinput && ./manage.py migrate  && gunicorn -b 0.0.0.0:8000 grandgrz.wsgi:application"
-  grandgrz_nginx_ssl:
+  grandgrz_nginx:
     build:
       dockerfile: ./Dockerfile
       context: ./docker/nginx/
-    container_name: grandgrz_nginx_ssl
-    image: grandgrz_nginx_ssl
+    container_name: grandgrz_nginx
+    image: grandgrz_nginx
     volumes:
-      - static_volume_ssl:/grandgrz/static
-      - media_volume_ssl:/grandgrz/media
+      - static_volume:/grandgrz/static
+      - media_volume:/grandgrz/media
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ru
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
-      - grandgrz_project_ssl
+      - grandgrz_project
     ports:
       - "${NGINX_EXTERNAL_PORT}:80"
       - "${NGINX_EXTERNAL_SSL_PORT}:443"
-  acme_companion_ssl:
+  acme_companion:
     image: nginxproxy/acme-companion:2.2
-    container_name: grandgrz_acme_ssl
+    container_name: grandgrz_acme
     volumes_from:
-      - grandgrz_nginx_ssl
+      - grandgrz_nginx
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - acme:/etc/acme.sh
 
 volumes:
-  static_volume_ssl:
-  media_volume_ssl:
+  static_volume:
+  media_volume:
   certs:
   vhost:
   html:
