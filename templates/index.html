@@ -5,11 +5,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="ТОП ТРИ">
-    <meta name="description" content="">
-    <title>Гранд Грязи</title>
+    <meta name="keywords" content="Гранд Грязи,Агенство недвижимости,Грязи,агенство недвижимости грязи,agenstvo,nedvizhimost,gryzi,gryazy,недвижимость,недвижимость в области,грз,недвижимость 48 регион,48 ру">
+    <meta name="description" content="агентство недвижимости в город грязи, агентство в области, недвижимость в городе и области">
+    <meta name="author" content="TheValerich">
+    <meta name="author" content="DP">
+    <title>Агенство недвижимости Гранд Грязи</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen">
-
     <link rel="stylesheet" href="{% static 'css/index.css' %}" media="screen">
     <script class="u-script" type="text/javascript" src="{% static 'js/jquery.js' %}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{% static 'js/main.js' %}" defer=""></script>
@@ -253,7 +254,7 @@
     </div>
 </section>
 {% block content %}
-
+{% if best_offer %}
 <section class="u-align-center u-clearfix u-section-5" id="sec-ade8">
     <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-text u-text-default u-text-1">ЛУЧШИЕ ПРЕДЛОЖЕНИЯ</h2>
@@ -279,8 +280,7 @@
                         <img class="u-expanded-width u-image u-image-default u-image-1" alt="image" data-image-width="512"
                              data-image-height="512" src="{% if offer.image %}{{ offer.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"></a>
                         <h4 class="u-text u-text-2"><a href="{% url 'agency:estate_detail_url' offer.pk %}">{{ offer.name }}</a></h4>
-                        <p class="u-text u-text-3"><strong>Площадь:</strong> {{ offer.area }}</p>
-                        <p class="u-text u-text-3"><strong>Количество комнат:</strong> {{ offer.rooms }}</p>
+                        <p class="u-text u-text-3"><strong>Площадь:</strong> {{ offer.area }} м²</p>
                     </div>
                 </div>
                 {% endfor %}
@@ -301,6 +301,7 @@
         </div>
     </div>
 </section>
+{% endif %}
 {% endblock %}
 
 <footer class="u-align-center u-clearfix u-footer u-gradient u-footer" id="sec-2cbf">
